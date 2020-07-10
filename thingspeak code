@@ -1,0 +1,22 @@
+#include"ThingSpeak.h"
+# include<ESP8266WiFi.h>
+char ssid[]="vivo 1606";
+char pass[]="sushma22";
+WiFiClient client;
+unsigned long num = 664489;//channel id
+const char *writekey="ELX6QDPHAWF3E9GV";
+
+void setup() {
+pinMode(A0,OUTPUT);
+WiFi.begin(ssid, pass);
+Serial.begin(115200);
+ThingSpeak.begin(client);
+}
+void loop() {
+ 
+float h = analogRead(A0);
+ // Read soil moisture values
+ 
+ThingSpeak.writeField(num,3,h,writekey);
+delay(1000);
+}
